@@ -1,52 +1,53 @@
-#include <stdio.h>
+//ì†Œì¼“ í†µì‹ ì„ ìœ„í•œ í•´ë” íŒŒì¼ 
+#include <stdio.h> 
 #include <WinSock2.h>
 #pragma comment (lib, "ws2_32.lib")
 
 
-int main(void) {
+int main(void) { //ë©”ì¸í•¨ìˆ˜ 
 
-	WSADATA w;
+	WSADATA w; 
 	SOCKET SockSvr;
 	SOCKET SockSS;
 	int nlen;
-	struct sockaddr_in addrSockSvr;
+	struct sockaddr_in addrSockSvr; 
 	struct sockaddr_in addrSockclt;
 
-	if (WSAStartup(MAKEWORD(2, 2), &w) == SOCKET_ERROR) {
-		printf("¿ø¼Ó ÃÊ±âÈ­ ½ÇÆĞ\n");
+	if (WSAStartup(MAKEWORD(2, 2), &w) == SOCKET_ERROR) { //ì›ì† ì´ˆê¸°í™” 
+		printf("ì›ì† ì´ˆê¸°í™” ì‹¤íŒ¨\n");
 	}
 
 	else
-		printf("¿ø¼Ó ÃÊ±âÈ­ ¼º°ø\n");
+		printf("ì›ì† ì´ˆê¸°í™” ì„±ê³µ\n");
 	
 
-	SockSvr = socket(AF_INET, SOCK_STREAM, 0);
+	SockSvr = socket(AF_INET, SOCK_STREAM, 0); //ì†Œì¼“ìƒì„±
 	if (SockSvr == INVALID_SOCKET) {
-		printf("¼ÒÄÏ »ı¼º ½ÇÆĞ\n");
+		printf("ì†Œì¼“ ìƒì„± ì‹¤íŒ¨\n");
 		return 0;
 	}
 	else
-		printf("¼ÒÄÏ »ı¼º ¼º°ø\n");
+		printf("ì†Œì¼“ ìƒì„± ì„±ê³µ\n");
 
 	addrSockSvr.sin_family = AF_INET;
 	addrSockSvr.sin_port = htons(9000);
 	addrSockSvr.sin_addr.S_un.S_addr = INADDR_ANY;
 	bind(SockSvr, (struct sockaddr*) & addrSockSvr, sizeof(addrSockSvr));
-	printf("¼º°ø\n");
+	printf("ì„±ê³µ\n");
 
 
 	listen(SockSvr, 5);
-	printf("¼º°ø\n");
+	printf("ì„±ê³µ\n");
 
 	nlen = sizeof(addrSockclt);
 	SockSS = accept(SockSvr, (struct sockaddr*) &addrSockclt, &nlen);
-	printf("¼º°ø\n");
+	printf("ì„±ê³µ\n");
 
 	send(SockSS, "Hello TCP/IP WORLD", 18, 0);
-	printf("¼º°ø\n");
+	printf("ì„±ê³µ\n");
 
 	closesocket(SockSS);
-	printf("¼º°ø\n");
+	printf("ì„±ê³µ\n");
 
 	WSACleanup();
 
