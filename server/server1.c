@@ -28,7 +28,7 @@ int main(void) { //메인함수
 	}
 	else
 		printf("소켓 생성 성공\n");
-
+	//구조체 초기화 
 	addrSockSvr.sin_family = AF_INET;
 	addrSockSvr.sin_port = htons(9000);
 	addrSockSvr.sin_addr.S_un.S_addr = INADDR_ANY;
@@ -36,14 +36,14 @@ int main(void) { //메인함수
 	printf("성공\n");
 
 
-	listen(SockSvr, 5);
+	listen(SockSvr, 5); //listen 
 	printf("성공\n");
 
-	nlen = sizeof(addrSockclt);
-	SockSS = accept(SockSvr, (struct sockaddr*) &addrSockclt, &nlen);
+	nlen = sizeof(addrSockclt); //사이즈 측정 
+	SockSS = accept(SockSvr, (struct sockaddr*) &addrSockclt, &nlen); 
 	printf("성공\n");
 
-	send(SockSS, "Hello TCP/IP WORLD", 18, 0);
+	send(SockSS, "Hello TCP/IP WORLD", 18, 0); //클라이언트쪽으로 넘김 
 	printf("성공\n");
 
 	closesocket(SockSS);
